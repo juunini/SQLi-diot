@@ -20,10 +20,6 @@ class Main(QMainWindow):
 		window.setLayout(main)
 		self.setCentralWidget(window)
 
-		#스타일시트
-		#with open('qss.qss', 'r') as qss:
-		#	self.setStyleSheet(qss.read())
-
 		#크기 설정
 		self.setGeometry(300,100,800,0)
 		#제목 설정
