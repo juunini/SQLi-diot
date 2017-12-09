@@ -46,18 +46,32 @@ class Main(QMainWindow):
 		#메뉴바
 		menubar = self.menuBar()
 		menubar.setStyleSheet("""
-			QMenuBar{padding: 4px 20px; font-size: 16px; color: #747a81; background: #22282e;}
+			QMenuBar{
+				padding: 6px 30px;
+				background: qlineargradient(x1:0 y1:0 x2:0 y2:1, stop:0 #23282e, stop:1 #1c1f24);
+				font-size: 28px;
+				font-weight: light;
+				color: #fff;
+			}
+			QMenuBar::item{background: none;}
 		""")
 		menu = menubar.addMenu('Menu')
 
 		save = menu.addAction("Save")
 		exit = menu.addAction("Exit")
 
+		save.setShortcut("Ctrl+S")
+		save.setStatusTip("Save Process")
+
 		exit.setShortcut("Ctrl+Q")
 		exit.setStatusTip("Exit Application")
 		exit.triggered.connect(quit)
 
 		self.setMenuBar(menubar)
+
+		#폰트
+		QFontDatabase.addApplicationFont("Sansita-Regular.ttf")
+		QFontDatabase.addApplicationFont("NanumGothic.ttf")
 
 if __name__ == "__main__":
 	app = QApplication(sys.argv)

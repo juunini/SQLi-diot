@@ -156,7 +156,7 @@ def Confirm(wrap, layout, titleWidget, titleLayout, title, titleText):
 	titleWidget.setFixedHeight(90)
 	titleLayout.setContentsMargins(0, 0, 0, 0)
 	titleLayout.setSpacing(0)
-	title.setStyleSheet("QLabel{margin-top: 14px; font-size: 16px; font-weight: 600; color: #8492a1; background: none;}")
+	title.setStyleSheet("QLabel{margin-top: 14px; font-size: 16px; font-weight: 600; font-family: NanumGothic; color: #8492a1; background: none;}")
 
 def Confirm_Button(layout, buttonWidget, buttonLayout, Prev, Next):
 	buttonWidget.setLayout(buttonLayout)

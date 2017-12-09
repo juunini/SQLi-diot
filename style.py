@@ -16,14 +16,15 @@ def Title(entity, entity2, entity3):
 	entity.setFixedHeight(90)
 	entity2.setContentsMargins(0, 0, 0, 0)
 	entity2.setSpacing(0)
-	Style(entity3[0], "font-size: 28px; font-weight: light; color: #fff; background: none;")
-	Style(entity3[1], "margin-top: 14px; font-size: 16px; font-weight: 600; color: #8492a1; background: none;")
+	Style(entity3[0], "font-size: 28px; font-weight: light; color: #fff; background: none; font-family: Sansita")
+	Style(entity3[1], "margin-top: 14px; font-size: 16px; font-weight: bold; font-family: NanumGothic; color: #8492a1; background: none;")
 
 def Input(entity):
 	Style(entity, """
 		height: 30px;
 		padding: 0 20px;
 		font-size: 14px;
+		font-family: Sansita;
 		color: #747a81;
 		border-top: 2px solid #101315;
 		border-left: 2px solid #101315;
@@ -37,6 +38,7 @@ def TextArea(entity):
 		height: 90px;
 		padding: 0 20px;
 		font-size: 14px;
+		font-family: Sansita;
 		color: #747a81;
 		border-top: 2px solid #101315;
 		border-left: 2px solid #101315;
@@ -64,25 +66,32 @@ def Url(entity, entity2):
 		border-right: 2px solid #242a2f;
 		border-bottom: 2px solid #2b3136;
 		background: #15181b;
+		font-family: Sansita;
 	""")
 
 def Button(entity1, entity2, entity3):
 	Style(entity1, """
-		min-width: 180px;
-		min-height: 70px;
-		color: #fff;
-		font-size: 18px;
-		font-weight: bold;
-		background: #ce70ff;
+		QPushButton{
+			min-width: 180px;
+			min-height: 70px;
+			color: #fff;
+			font-size: 18px;
+			font-weight: bold;
+			font-family: Sansita;
+			background: #ce70ff;
+		}
 	""")
 
 	Style(entity2, """
-		min-width: 180px;
-		min-height: 70px;
-		color: #fff;
-		font-size: 18px;
-		font-weight: bold;
-		background: #11beff;
+		QPushButton{
+			min-width: 180px;
+			min-height: 70px;
+			color: #fff;
+			font-size: 18px;
+			font-weight: bold;
+			font-family: Sansita;
+			background: #11beff;
+		}
 	""")
 
 	entity3.setContentsMargins(0, 0, 0, 0)
@@ -99,6 +108,7 @@ def Select(entity):
 			border-right: 2px solid #242a2f;
 			border-bottom: 2px solid #2b3136;
 			background: #15181b;
+			font-family: Sansita;
 		}
 		QComboBox::drop-down{
 			border: none;
