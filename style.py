@@ -32,6 +32,19 @@ def Input(entity):
 		background: #15181b;
 	""")
 
+def TextArea(entity):
+	Style(entity, """
+		height: 90px;
+		padding: 0 20px;
+		font-size: 14px;
+		color: #747a81;
+		border-top: 2px solid #101315;
+		border-left: 2px solid #101315;
+		border-right: 2px solid #242a2f;
+		border-bottom: 2px solid #2b3136;
+		background: #15181b;
+	""")
+
 def Text(entity):
 	Style(entity, """
 		height: 30px;
