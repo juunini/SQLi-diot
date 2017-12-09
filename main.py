@@ -45,6 +45,9 @@ class Main(QMainWindow):
 
 		#메뉴바
 		menubar = self.menuBar()
+		menubar.setStyleSheet("""
+			QMenuBar{padding: 4px 20px; font-size: 16px; color: #747a81; background: #22282e;}
+		""")
 		menu = menubar.addMenu('Menu')
 
 		save = menu.addAction("Save")
