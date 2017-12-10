@@ -9,7 +9,6 @@ def Wrap(entity, entity2):
 	Style(entity, "background: #22282e; color: #747a81;")
 	entity2.setContentsMargins(0, 0, 0, 40)
 	entity2.setSpacing(0)
-	#Main.setGeometry(300,100,800,0)
 
 def Title(entity, entity2, entity3):
 	Style(entity, "padding: 0 30px; background: qlineargradient(x1:0 y1:0 x2:0 y2:1, stop:0 #23282e, stop:1 #1c1f24);")
@@ -49,7 +48,6 @@ def TextArea(entity):
 
 def Text(entity):
 	Style(entity, """
-		height: 30px;
 		font-size: 14px;
 		color: #747a81;
 	""")

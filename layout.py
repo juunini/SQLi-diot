@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from modules import *
 import style
+import active
 
 wrap = []
 layout = []
@@ -195,6 +196,8 @@ url[0].setPlaceholderText("취약한 페이지를 찾아 입력해주세요.")
 Button(0)
 Prev[0].hide()
 
+Next[0].clicked.connect(active.Step0_Next) #다음으로 넘어가기
+
 #-------------------------------------------------------------------
 
 Wrap(1)
@@ -204,22 +207,19 @@ Title("Step 1.", "취약점 파악하기", 1)
 SelectZone(1)
 SettingZone(1, 0)
 SettingZone(1, 1)
-SettingZone(1, 2)
-
-SlicedUrl(1)
-settingLayout[1][0].addStretch(0)
-settingLayout[1][0].addWidget(slicedUrl[1])
 
 step1_number = QComboBox()
 step1_number.addItem("")
-step1_number.addItem("99999")
-step1_number.addItem("null")
+step1_number.addItem("")
+step1_number.addItem("")
 style.Select(step1_number)
 
-settingLayout[1][1].addStretch(0)
-settingLayout[1][1].addWidget(step1_number)
+settingLayout[1][0].addStretch(0)
+settingLayout[1][0].addWidget(step1_number)
 
 SetAscii(1)
+setAscii[1].removeItem(len(setAscii[1]) - 2)
+setAscii[1].removeItem(len(setAscii[1]) - 1)
 
 setColon = QComboBox()
 setColon.addItem("'")
@@ -227,11 +227,57 @@ setColon.addItem('"')
 setColon.addItem(")")
 style.Select(setColon)
 
-settingLayout[1][2].addWidget(setAscii[1])
-settingLayout[1][2].addWidget(setColon)
+settingLayout[1][1].addWidget(setAscii[1])
+settingLayout[1][1].addWidget(setColon)
+
+step1_number.currentIndexChanged.connect(active.Step1_SetNumber)
+setColon.currentIndexChanged.connect(active.Step1_SetColon)
+setAscii[1].currentIndexChanged.connect(active.Step1_SettingColon)
 
 Url(1)
 Button(1)
+
+Prev[1].clicked.connect(active.Step1_Prev)
+Next[1].clicked.connect(active.Step1_Next)
+
+#-------------------------------------------------
+
+confirm_step1_wrap = QWidget()
+confirm_step1_layout = QVBoxLayout()
+confirm_step1_titleWidget = QWidget()
+confirm_step1_titleLayout = QHBoxLayout()
+confirm_step1_title = QLabel("")
+confirm_step1_buttonWidget = QWidget()
+confirm_step1_buttonLayout = QHBoxLayout()
+confirm_step1_prev = QPushButton("Prev")
+confirm_step1_next = QPushButton("Next")
+
+Confirm(confirm_step1_wrap, confirm_step1_layout, confirm_step1_titleWidget, confirm_step1_titleLayout, confirm_step1_title, "DB타입이 무엇입니까?")
+confirm_step1_wrap.hide()
+
+confirm_step1_radioButton = []
+confirm_step1_radioButton.append(QRadioButton("MySQL"))
+confirm_step1_radioButton.append(QRadioButton("ODBC"))
+confirm_step1_radioButton.append(QRadioButton("Oracle"))
+confirm_step1_radioButton.append(QRadioButton("postgreSQL"))
+confirm_step1_radioButton.append(QRadioButton("MS-SQL ASPX"))
+confirm_step1_radioButton.append(QRadioButton("MS-SQL Server"))
+confirm_step1_radioButton.append(QRadioButton("MS-Access (Apache PHP)"))
+confirm_step1_radioButton.append(QRadioButton("MS-Access (IIS ASP)"))
+confirm_step1_radioButtonWidget = QGroupBox()
+confirm_step1_radioButtonLayout = QVBoxLayout()
+confirm_step1_radioButtonWidget.setLayout(confirm_step1_radioButtonLayout)
+confirm_step1_prev = QPushButton("Prev")
+confirm_step1_next = QPushButton("Next")
+
+for i in range(0, 8):
+	confirm_step1_radioButtonLayout.addWidget(confirm_step1_radioButton[i])
+
+confirm_step1_layout.addWidget(confirm_step1_radioButtonWidget)
+Confirm_Button(confirm_step1_layout, confirm_step1_buttonWidget, confirm_step1_buttonLayout, confirm_step1_prev, confirm_step1_next)
+
+confirm_step1_prev.clicked.connect(active.Step1_Confirm_Prev)
+confirm_step1_next.clicked.connect(active.Step1_Confirm_Next)
 
 #-------------------------------------------------
 
@@ -244,25 +290,26 @@ SettingZone(2, 0)
 SettingZone(2, 1)
 SettingZone(2, 2)
 
-SlicedUrl(2)
-settingLayout[2][0].addStretch(0)
-settingLayout[2][0].addWidget(slicedUrl[2])
-
-
 order_by = QComboBox()
 order_by.addItem(" order by ")
 order_by.addItem(" group by ")
 style.Select(order_by)
 
-SetAscii(2)
 AlphabetCase(2)
+SetAscii(2)
 WhiteSpace(2)
 Comment(2)
-settingLayout[2][1].addWidget(alphabetCase[2])
-settingLayout[2][1].addWidget(setAscii[2])
-settingLayout[2][1].addWidget(whiteSpace[2])
-settingLayout[2][1].addWidget(comment[2])
-settingLayout[2][1].addWidget(order_by)
+settingLayout[2][0].addWidget(alphabetCase[2])
+settingLayout[2][0].addWidget(setAscii[2])
+settingLayout[2][0].addWidget(whiteSpace[2])
+settingLayout[2][0].addWidget(comment[2])
+settingLayout[2][0].addWidget(order_by)
+
+order_by.currentIndexChanged.connect(active.Step2_SetOrderBy)
+alphabetCase[2].currentIndexChanged.connect(active.Step2_SettingOrderBy)
+setAscii[2].currentIndexChanged.connect(active.Step2_SettingOrderBy)
+whiteSpace[2].currentIndexChanged.connect(active.Step2_SettingOrderBy)
+comment[2].currentIndexChanged.connect(active.Step2_SettingOrderBy)
 
 column_amount = QLineEdit()
 column_amount.setPlaceholderText("숫자를 입력해주세요.")
@@ -274,12 +321,21 @@ lastComment.addItem("--+")
 lastComment.addItem("--+-")
 lastComment.addItem("-- -")
 style.Select(lastComment)
+settingLayout[2][1].addStretch(0)
+settingLayout[2][1].addWidget(column_amount)
+
 settingLayout[2][2].addStretch(0)
-settingLayout[2][2].addWidget(column_amount)
 settingLayout[2][2].addWidget(lastComment)
+
+keyPressed = pyqtSignal()
+lastComment.currentIndexChanged.connect(active.Step2_SetOrderBy)
+column_amount.textChanged.connect(active.Step2_SetOrderBy)
 
 Url(2)
 Button(2)
+
+Prev[2].clicked.connect(active.Step2_Prev)
+Next[2].clicked.connect(active.Step2_Next)
 
 #----------------------------------------------------------
 
@@ -292,15 +348,12 @@ SettingZone(3, 0)
 SettingZone(3, 1)
 SettingZone(3, 2)
 
-SlicedUrl(3)
-
 error_factor = QComboBox()
 error_factor.addItem("(옵션)에러유발인자 없음")
 error_factor.addItem("(옵션)'-' 추가")
 style.Select(error_factor)
 settingLayout[3][0].addStretch(0)
 settingLayout[3][0].addWidget(error_factor)
-settingLayout[3][0].addWidget(slicedUrl[3])
 
 SetAscii(3)
 AlphabetCase(3)
@@ -327,8 +380,20 @@ style.Select(number)
 settingLayout[3][2].addStretch(0)
 settingLayout[3][2].addWidget(number)
 
+error_factor.currentIndexChanged.connect(active.Step3_SetUrl)
+union_select.currentIndexChanged.connect(active.Step3_SetUrl)
+number.currentIndexChanged.connect(active.Step3_SetUrl)
+
+alphabetCase[3].currentIndexChanged.connect(active.Step3_SetUnion)
+setAscii[3].currentIndexChanged.connect(active.Step3_SetUnion)
+whiteSpace[3].currentIndexChanged.connect(active.Step3_SetUnion)
+comment[3].currentIndexChanged.connect(active.Step3_SetUnion)
+
 Url(3)
 Button(3)
+
+Prev[3].clicked.connect(active.Step3_Prev)
+Next[3].clicked.connect(active.Step3_Next)
 
 #------------------------------------------------------
 
@@ -351,6 +416,10 @@ confirm_step3_wrap.hide()
 Confirm_Input(confirm_step3_layout, confirm_step3_inputWidget, confirm_step3_inputLayout, confirm_step3_input, "숫자를 입력해주세요.")
 Confirm_Button(confirm_step3_layout, confirm_step3_buttonWidget, confirm_step3_buttonLayout, confirm_step3_prev, confirm_step3_next)
 
+confirm_step3_prev.clicked.connect(active.Step3_Confirm_Prev)
+confirm_step3_next.clicked.connect(active.Step3_Confirm_Next)
+confirm_step3_input.textChanged.connect(active.Step3_Confirm_Input)
+
 #------------------------------------------------------
 
 Wrap(4)
@@ -360,15 +429,32 @@ Title("Step 4", "서버 운영체제 파악하기", 4)
 SelectZone(4)
 SettingZone(4, 0)
 
+version = QComboBox()
+version.addItem("version()")
+version.addItem("@@version")
+style.Select(version)
+
 SetAscii(4)
 AlphabetCase(4)
 Comment(4)
+
+alphabetCase[4].removeItem(3)
+
 settingLayout[4][0].addWidget(alphabetCase[4])
 settingLayout[4][0].addWidget(setAscii[4])
 settingLayout[4][0].addWidget(comment[4])
+settingLayout[4][0].addWidget(version)
+
+alphabetCase[4].currentIndexChanged.connect(active.Step4_SetUrl)
+setAscii[4].currentIndexChanged.connect(active.Step4_SetUrl)
+comment[4].currentIndexChanged.connect(active.Step4_SetUrl)
+version.currentIndexChanged.connect(active.Step4_SetUrl)
 
 Url(4)
 Button(4)
+
+Prev[4].clicked.connect(active.Step4_Prev)
+Next[4].clicked.connect(active.Step4_Next)
 
 #----------------------------------------------------------
 
@@ -390,6 +476,9 @@ confirm_step4_wrap.hide()
 
 Confirm_Input(confirm_step4_layout, confirm_step4_inputWidget, confirm_step4_inputLayout, confirm_step4_input, "서버 운영체제를 입력해주세요.")
 Confirm_Button(confirm_step4_layout, confirm_step4_buttonWidget, confirm_step4_buttonLayout, confirm_step4_prev, confirm_step4_next)
+
+confirm_step4_prev.clicked.connect(active.Step4_Confirm_Prev)
+confirm_step4_next.clicked.connect(active.Step4_Confirm_Next)
 
 #----------------------------------------------------------
 

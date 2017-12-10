@@ -14,14 +14,13 @@ class Main(QMainWindow):
 
 		for i in range(0, 9):
 			main.addWidget(layout.wrap[i])
+		main.addWidget(layout.confirm_step1_wrap)
 		main.addWidget(layout.confirm_step3_wrap)
 		main.addWidget(layout.confirm_step4_wrap)
 		main.addWidget(layout.confirm_step5_wrap)
 		main.addWidget(layout.confirm_step6_wrap)
 		main.addWidget(layout.confirm_step7_wrap)
 		main.addWidget(layout.confirm_step8_wrap)
-
-		import style
 
 		window = QWidget()
 		window.setStyleSheet("background: #000;")
@@ -30,6 +29,7 @@ class Main(QMainWindow):
 
 		#크기 설정
 		self.setGeometry(300,100,800,0)
+		self.setFixedSize(800, 0)
 		#제목 설정
 		self.setWindowTitle("SQLi-diot");
 		self.show()
@@ -72,6 +72,7 @@ class Main(QMainWindow):
 		#폰트
 		QFontDatabase.addApplicationFont("Sansita-Regular.ttf")
 		QFontDatabase.addApplicationFont("NanumGothic.ttf")
+
 
 if __name__ == "__main__":
 	app = QApplication(sys.argv)
