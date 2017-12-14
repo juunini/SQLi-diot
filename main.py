@@ -35,13 +35,7 @@ class Main(QMainWindow):
 		self.show()
 
 		#아이콘
-		icon = QIcon()
-		icon.addFile('icon.png', QSize(16, 16))
-		icon.addFile('icon.png', QSize(24, 24))
-		icon.addFile('icon.png', QSize(32, 32))
-		icon.addFile('icon.png', QSize(48, 48))
-		icon.addFile('icon.png', QSize(256, 256))
-		self.setWindowIcon(icon)
+		self.setWindowIcon(QIcon('icon.png'))
 
 		#메뉴바
 		menubar = self.menuBar()
