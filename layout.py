@@ -179,6 +179,7 @@ def Confirm_Input(layout, inputWidget, inputLayout, _input, placeholder):
 
 def Confirm_TextArea(layout, textareaWidget, textareaLayout, textarea, placeholder):
 	textareaWidget.setLayout(textareaLayout)
+	textarea.setStyleSheet("QTextEdit{color: #747a81;}")
 	textarea.setPlaceholderText(placeholder)
 	style.TextArea(textarea) #스타일 설정
 	textareaLayout.addWidget(textarea)
@@ -487,18 +488,15 @@ wrap[5].hide()
 Title("Step 5", "DB 이름 파악하기", 5)
 
 SelectZone(5)
-SettingZone(5, 0)
-
 SetAscii(5)
 AlphabetCase(5)
 Comment(5)
-settingLayout[5][0].addWidget(alphabetCase[5])
-settingLayout[5][0].addWidget(setAscii[5])
-settingLayout[5][0].addWidget(comment[5])
 
 Url(5)
 Button(5)
 
+Prev[5].clicked.connect(active.Step5_Prev)
+Next[5].clicked.connect(active.Step5_Next)
 
 #--------------------------------------------------------------
 
@@ -521,6 +519,9 @@ confirm_step5_wrap.hide()
 Confirm_Input(confirm_step5_layout, confirm_step5_inputWidget, confirm_step5_inputLayout, confirm_step5_input, "DB이름을 입력해주세요.")
 Confirm_Button(confirm_step5_layout, confirm_step5_buttonWidget, confirm_step5_buttonLayout, confirm_step5_prev, confirm_step5_next)
 
+confirm_step5_prev.clicked.connect(active.Step5_Confirm_Prev)
+confirm_step5_next.clicked.connect(active.Step5_Confirm_Next)
+
 #---------------------------------------------------------------
 
 Wrap(6)
@@ -529,16 +530,45 @@ Title("Step 6", "Table 이름 알아내기", 6)
 
 SelectZone(6)
 SettingZone(6, 0)
+SettingZone(6, 1)
+
+WhiteSpace(4)
+WhiteSpace(5)
+WhiteSpace(6)
 
 SetAscii(6)
 AlphabetCase(6)
 Comment(6)
+alphabetCase[6].removeItem(3)
+
+SetAscii(7)
+AlphabetCase(7)
+Comment(7)
+WhiteSpace(7)
 settingLayout[6][0].addWidget(alphabetCase[6])
 settingLayout[6][0].addWidget(setAscii[6])
 settingLayout[6][0].addWidget(comment[6])
 
+settingLayout[6][1].addWidget(alphabetCase[7])
+settingLayout[6][1].addWidget(setAscii[7])
+settingLayout[6][1].addWidget(comment[7])
+settingLayout[6][1].addWidget(whiteSpace[7])
+
+
+alphabetCase[6].currentIndexChanged.connect(active.Step6_SetUrl)
+setAscii[6].currentIndexChanged.connect(active.Step6_SetUrl)
+comment[6].currentIndexChanged.connect(active.Step6_SetUrl)
+alphabetCase[7].currentIndexChanged.connect(active.Step6_SetUrl)
+setAscii[7].currentIndexChanged.connect(active.Step6_SetUrl)
+comment[7].currentIndexChanged.connect(active.Step6_SetUrl)
+whiteSpace[7].currentIndexChanged.connect(active.Step6_SetUrl)
+
+
 Url(6)
 Button(6)
+
+Prev[6].clicked.connect(active.Step6_Prev)
+Next[6].clicked.connect(active.Step6_Next)
 
 #--------------------------------------------------------------------
 
@@ -565,6 +595,10 @@ Confirm_TextArea(confirm_step6_layout, confirm_step6_textareaWidget, confirm_ste
 Confirm_Input(confirm_step6_layout, confirm_step6_inputWidget, confirm_step6_inputLayout, confirm_step6_input, "정보를 추출해낼 Table의 이름을 하나만 입력해주세요.")
 Confirm_Button(confirm_step6_layout, confirm_step6_buttonWidget, confirm_step6_buttonLayout, confirm_step6_prev, confirm_step6_next)
 
+
+confirm_step6_prev.clicked.connect(active.Step6_Confirm_Prev)
+confirm_step6_next.clicked.connect(active.Step6_Confirm_Next)
+
 #-----------------------------------------------------------------------
 
 Wrap(7)
@@ -573,6 +607,9 @@ Title("Step 7", "Column 이름 알아내기", 7)
 
 Url(7)
 Button(7)
+
+Prev[7].clicked.connect(active.Step7_Prev)
+Next[7].clicked.connect(active.Step7_Next)
 
 #--------------------------------------------------------------------
 
@@ -599,6 +636,9 @@ Confirm_TextArea(confirm_step7_layout, confirm_step7_textareaWidget, confirm_ste
 Confirm_Input(confirm_step7_layout, confirm_step7_inputWidget, confirm_step7_inputLayout, confirm_step7_input, "정보를 추출해낼 Column의 이름을 입력해주세요.(다수 가능. 콤마로 구분해주세요.)")
 Confirm_Button(confirm_step7_layout, confirm_step7_buttonWidget, confirm_step7_buttonLayout, confirm_step7_prev, confirm_step7_next)
 
+confirm_step7_prev.clicked.connect(active.Step7_Confirm_Prev)
+confirm_step7_next.clicked.connect(active.Step7_Confirm_Next)
+
 #------------------------------------------------------------------------
 
 Wrap(8)
@@ -607,6 +647,9 @@ Title("Step 8", "Column에서 데이터 추출하기", 8)
 
 Url(8)
 Button(8)
+
+Prev[8].clicked.connect(active.Step8_Prev)
+Next[8].clicked.connect(active.Step8_Next)
 
 #--------------------------------------------------------------------------
 
@@ -629,3 +672,7 @@ confirm_step8_wrap.hide()
 Confirm_TextArea(confirm_step8_layout, confirm_step8_textareaWidget, confirm_step8_textareaLayout, confirm_step8_textarea, "출력된 Data 전체를 붙여넣기 해주세요.")
 Confirm_Button(confirm_step8_layout, confirm_step8_buttonWidget, confirm_step8_buttonLayout, confirm_step8_prev, confirm_step8_next)
 confirm_step8_textareaLayout.setContentsMargins(30, 30, 30, 30)
+
+
+confirm_step8_prev.clicked.connect(active.Step8_Confirm_Prev)
+#confirm_step8_next.clicked.connect(active.Step8_Confirm_Save)

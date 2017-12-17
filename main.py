@@ -41,13 +41,15 @@ class Main(QMainWindow):
 		menubar = self.menuBar()
 		menubar.setStyleSheet("""
 			QMenuBar{
-				padding: 6px 30px;
 				background: qlineargradient(x1:0 y1:0 x2:0 y2:1, stop:0 #23282e, stop:1 #1c1f24);
-				font-size: 28px;
+				font-family: Sansita, sans-serif;
 				font-weight: light;
+				font-size: 16px;
 				color: #fff;
 			}
-			QMenuBar::item{background: none;}
+			QMenuBar::item{
+				font-family: Sansita, sans-serif;
+			}
 		""")
 		menu = menubar.addMenu('Menu')
 
@@ -56,6 +58,11 @@ class Main(QMainWindow):
 
 		save.setShortcut("Ctrl+S")
 		save.setStatusTip("Save Process")
+		save.triggered.connect(self.Save_File)
+		import layout
+		import active
+		layout.confirm_step8_next.clicked.connect(active.Step8_Confirm_Save)
+		layout.confirm_step8_next.clicked.connect(self.Save_File)
 
 		exit.setShortcut("Ctrl+Q")
 		exit.setStatusTip("Exit Application")
@@ -67,6 +74,13 @@ class Main(QMainWindow):
 		QFontDatabase.addApplicationFont("Sansita-Regular.ttf")
 		QFontDatabase.addApplicationFont("NanumGothic.ttf")
 
+	def Save_File(self):
+		fileName = QFileDialog.getSaveFileName(self, "Save File", "./", "Text files (*.txt)")
+		fileName = str(fileName)[2 : str(fileName).find(",") -1] + ".txt"
+		saveFile = open(fileName, 'w')
+		import active
+		saveFile.write(active.save)
+		saveFile.close()
 
 if __name__ == "__main__":
 	app = QApplication(sys.argv)
